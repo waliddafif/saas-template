@@ -7,12 +7,12 @@
 
 ## Stack
 
-- **Framework** : Next.js 15 (static export — Firebase Hosting)
+- **Framework** : Next.js 15 (`output: standalone` — SSR complet)
 - **UI** : shadcn/ui (new-york, neutral) + Tailwind CSS v3
 - **Auth** : Swappable via `lib/auth/index.ts` (Firebase par défaut)
 - **Forms** : react-hook-form + zod
 - **Icons** : lucide-react
-- **Deploy** : Firebase Hosting
+- **Deploy** : Vercel (zero-config) ou Docker/Cloud Run
 
 ## Personnalisation rapide
 
@@ -27,7 +27,7 @@
 
 ```
 app/
-├── (landing)/        ← Site marketing public
+├── (landing)/        ← Site marketing public (SSR)
 │   ├── page.tsx      ← Homepage (Hero, Features, Pricing, FAQ, CTA)
 │   ├── tarifs/       ← Page pricing détaillée
 │   └── faq/          ← FAQ complète
@@ -48,13 +48,28 @@ lib/auth/             ← Auth swappable (firebase / supabase / jwt)
 cp .env.example .env.local
 npm install
 npm run dev
-npm run build   # OBLIGATOIRE avant commit (détecte erreurs static export)
+npm run build         # Vérifier avant commit
 ```
 
-## Pièges Next.js static export
+## Deploy
 
-- Routes dynamiques → `generateStaticParams()` + `usePathname()` (pas `useParams()`)
-- Pas de SSR, pas d'API Routes
-- Firebase → init lazy via `lib/auth/firebase.ts` (SSR-safe)
+```bash
+# Vercel (recommandé — zero config)
+vercel --prod
 
-Voir `~/.claude/rules/FRONTEND_BUILD.md`
+# Docker / GCP Cloud Run
+docker build -t mon-app .
+gcloud run deploy mon-app --source . --region europe-west1
+
+# Railway / Render
+# Push sur main → déploiement automatique
+```
+
+## Avantages vs static export
+
+- `useParams()` fonctionne nativement (plus de workaround `usePathname`)
+- Server Components avec data fetching
+- API Routes dans le même repo si besoin
+- Middleware pour auth server-side
+- Image Optimization automatique
+- ISR (revalidation automatique des pages)

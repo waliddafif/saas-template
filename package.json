@@ -11,7 +11,8 @@
     "test":           "vitest",
     "test:e2e":       "playwright test",
     "test:e2e:local": "PLAYWRIGHT_BASE_URL=http://localhost:3000 playwright test",
-    "deploy":         "npm run build && firebase deploy --only hosting"
+    "deploy:vercel":  "vercel --prod",
+    "deploy:docker":  "docker build -t saas-template . && docker run -p 3000:3000 saas-template"
   },
   "dependencies": {
     "next":                       "^15.0.0",
@@ -39,7 +40,6 @@
     "@vitejs/plugin-react":       "^4.3.0",
     "eslint":                     "^9.0.0",
     "eslint-config-next":         "^15.0.0",
-    "firebase-tools":             "^13.0.0",
     "jsdom":                      "^26.0.0",
     "tailwindcss":                "^3.4.0",
     "tailwindcss-animate":        "^1.0.7",

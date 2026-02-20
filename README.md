@@ -6,13 +6,13 @@ Template Next.js 15 complet pour applications SaaS — landing page + app proté
 
 | | |
 |---|---|
-| Framework | Next.js 15 (static export — Firebase Hosting) |
+| Framework | Next.js 15 (standalone — SSR complet) |
 | UI | shadcn/ui (new-york, neutral) + Tailwind CSS v3 |
 | Auth | Swappable : Firebase (défaut) / Supabase / JWT custom |
 | Forms | react-hook-form + zod |
 | Icons | lucide-react |
 | Toasts | sonner |
-| Deploy | Firebase Hosting |
+| Deploy | Vercel / GCP Cloud Run / Railway / Docker |
 
 ## Démarrage rapide
 
@@ -94,8 +94,26 @@ import { supabaseAuthAdapter as adapter } from "./supabase";  // Supabase
 ## Deploy
 
 ```bash
-npm run deploy  # build + firebase deploy
+# Vercel (recommandé — zero config)
+vercel --prod
+
+# GCP Cloud Run
+gcloud run deploy mon-app --source . --region europe-west1
+
+# Docker
+docker build -t mon-app .
+docker run -p 3000:3000 mon-app
+
+# Railway / Render / Netlify
+# Push sur main → déploiement automatique
 ```
+
+## Notes
+
+- `useParams()` fonctionne nativement (plus de workaround `usePathname`)
+- Server Components disponibles pour le data fetching
+- API Routes disponibles dans `app/api/` si besoin d'un backend léger
+- Firebase Auth → init lazy via `lib/auth/firebase.ts` (SSR-safe côté client)
 
 ## Conventions
 
