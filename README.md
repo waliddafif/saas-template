@@ -1,13 +1,13 @@
 # saas-template
 
-Template Next.js 15 complet pour applications SaaS — landing page + app protégée.
+Template Next.js 16 complet pour applications SaaS — landing page + app protégée.
 
 ## Stack
 
 | | |
 |---|---|
-| Framework | Next.js 15 (standalone — SSR complet) |
-| UI | shadcn/ui (new-york, neutral) + Tailwind CSS v3 |
+| Framework | Next.js 16 (standalone — SSR complet) |
+| UI | shadcn/ui (new-york, neutral) + Tailwind CSS v4 |
 | Auth | Swappable : Firebase (défaut) / Supabase / JWT custom |
 | Forms | react-hook-form + zod |
 | Icons | lucide-react |
