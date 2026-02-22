@@ -16,12 +16,13 @@ function applyTheme(theme: Theme) {
 
 /** Dark mode hook — persisted in localStorage, supports system preference */
 export function useTheme() {
-  const [theme, setThemeState] = useState<Theme>("system");
+  const [theme, setThemeState] = useState<Theme>(() => {
+    if (typeof window === "undefined") return "system";
+    return (localStorage.getItem("theme") as Theme) ?? "system";
+  });
 
   useEffect(() => {
-    const stored = (localStorage.getItem("theme") as Theme) ?? "system";
-    setThemeState(stored);
-    applyTheme(stored);
+    applyTheme(theme);
 
     // Listen for system preference changes
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
@@ -30,7 +31,7 @@ export function useTheme() {
     };
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
-  }, []);
+  }, [theme]);
 
   function setTheme(next: Theme) {
     localStorage.setItem("theme", next);
