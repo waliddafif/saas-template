@@ -33,9 +33,32 @@ npm run build                # OBLIGATOIRE avant commit
 6. **Auth provider** : modifier l'import dans `lib/auth/index.ts`
 7. **Couleurs** : modifier les tokens HSL dans `app/globals.css`
 
+## Auth routing
+
+Le fichier `proxy.ts` (racine du projet) gère les redirections :
+
+| Route | Non connecté | Connecté |
+|-------|-------------|----------|
+| `/` (landing) | ✅ Accessible | ✅ Accessible |
+| `/login`, `/signup` | ✅ Accessible | → `/dashboard` |
+| `/dashboard/*` | → `/login` | ✅ Accessible |
+| `/faq`, `/tarifs` | ✅ Accessible | ✅ Accessible |
+
+**Configurer la vérification de session** dans `proxy.ts` :
+
+```ts
+// Nom du cookie de session — à adapter selon le provider
+const SESSION_COOKIE = "auth-session";
+```
+
+- **Firebase** : setter le cookie manuellement après `signIn` : `document.cookie = "auth-session=1; path=/; SameSite=Lax"`
+- **NextAuth** : remplacer la vérification par `getToken({ req })` de `next-auth/jwt`
+- **Supabase** : utiliser `createServerClient` de `@supabase/ssr` et `supabase.auth.getUser()`
+
 ## Structure
 
 ```
+proxy.ts                     ← Auth routing (public / protégé / auth-only)
 app/
 ├── layout.tsx               ← Root layout (font Manrope, metadata, Toaster)
 ├── globals.css              ← Design tokens (couleurs, shadows, dark mode)
