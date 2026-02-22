@@ -75,7 +75,7 @@ export default function LoginPage() {
               autoComplete="email"
               placeholder="vous@exemple.fr"
               {...register("email")}
-              className="mt-1 w-full h-11 rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+              className="mt-1 w-full h-11 rounded-md border border-input bg-background px-3 text-sm focus:outline-hidden focus:ring-2 focus:ring-ring"
             />
             {errors.email && (
               <p className="mt-1 text-xs text-destructive">{errors.email.message}</p>
@@ -89,7 +89,7 @@ export default function LoginPage() {
               type="password"
               autoComplete="current-password"
               {...register("password")}
-              className="mt-1 w-full h-11 rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+              className="mt-1 w-full h-11 rounded-md border border-input bg-background px-3 text-sm focus:outline-hidden focus:ring-2 focus:ring-ring"
             />
             {errors.password && (
               <p className="mt-1 text-xs text-destructive">{errors.password.message}</p>

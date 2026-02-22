@@ -7,8 +7,8 @@
 
 ## Stack
 
-- **Framework** : Next.js 15 (`output: standalone` — SSR complet)
-- **UI** : shadcn/ui (new-york, neutral) + Tailwind CSS v3
+- **Framework** : Next.js 16 (`output: standalone` — SSR complet)
+- **UI** : shadcn/ui (new-york, neutral) + Tailwind CSS v4
 - **Auth** : Swappable via `lib/auth/index.ts` (Firebase par défaut)
 - **Forms** : react-hook-form + zod
 - **Icons** : lucide-react

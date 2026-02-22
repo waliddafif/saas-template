@@ -51,7 +51,7 @@ export function AppShell({ sidebar, header, children }: AppShellProps) {
         <Button
           variant="ghost"
           size="icon"
-          className="hidden md:flex absolute -right-3 top-6 z-10 h-6 w-6 rounded-full border border-border bg-background shadow-sm"
+          className="hidden md:flex absolute -right-3 top-6 z-10 h-6 w-6 rounded-full border border-border bg-background shadow-xs"
           onClick={toggleCollapse}
           aria-label={collapsed ? "Déplier le menu" : "Replier le menu"}
         >
@@ -64,7 +64,7 @@ export function AppShell({ sidebar, header, children }: AppShellProps) {
       {/* Main */}
       <div className="flex flex-1 flex-col min-w-0 overflow-hidden">
         {/* Header */}
-        <header className="flex h-16 items-center gap-4 border-b border-border bg-card/80 backdrop-blur-sm px-4 shrink-0">
+        <header className="flex h-16 items-center gap-4 border-b border-border bg-card/80 backdrop-blur-xs px-4 shrink-0">
           {/* Mobile menu toggle */}
           <Button
             variant="ghost"

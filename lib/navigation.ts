@@ -19,16 +19,15 @@ export interface NavigationItem {
  * Single source of truth for navigation.
  * Filter by role before rendering.
  */
-export function getNavItems(role: UserRole): NavigationItem[] {
-  // Import icons where this function is used to keep this file framework-agnostic
-  // Example: import { LayoutDashboard, Users, Settings } from "lucide-react"
+export type NavigationItemWithIconName = Omit<NavigationItem, "icon"> & { iconName: string };
+
+export function getNavItems(role: UserRole): NavigationItemWithIconName[] {
   return NAV_ITEMS.filter(
     (item) => !item.roles || item.roles.includes(role),
   );
 }
 
-// Define your nav items here — import icons in the component that renders them
-export const NAV_ITEMS: Omit<NavigationItem, "icon"> & { iconName: string }[] = [
+export const NAV_ITEMS: NavigationItemWithIconName[] = [
   { href: "/app/dashboard", label: "Dashboard",  iconName: "LayoutDashboard", section: "main" },
   { href: "/app/contacts",  label: "Contacts",   iconName: "Users",           section: "main" },
   { href: "/app/settings",  label: "Paramètres", iconName: "Settings",        section: "settings" },
